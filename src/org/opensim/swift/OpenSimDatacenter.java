@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.cloudbus.cloudsim.Log;
 import org.cloudbus.cloudsim.ParameterException;
-import org.opensim.storage.OpenSimFile;
 import org.opensim.storage.OpensimStorageControlNode;
 
 class OpenSimDatacenter
@@ -30,30 +29,30 @@ class OpenSimDatacenter
 	
 	//try the various file operations here like insert ,delete,retrieve here
 	
-	void fileOperations(List<OpenSimFile>filelist)
+	void fileOperations(List<org.opensim.swift.OpenSimFile> privatefilelist)
 	{
 		//Log.printLine("***Query*** "+ filelist);
-		Log.printLine(" oldsize "+filelist.size());
+		Log.printLine(" oldsize "+privatefilelist.size());
 
-		for(int i=0;i<filelist.size();++i)
+		for(int i=0;i<privatefilelist.size();++i)
 		{
 			Log.printLine("\nInserting file #"+(i+1) );
-			ctlnode0.ClientQuery("INSERT",filelist.get(i) );
+			ctlnode0.ClientQuery("INSERT",privatefilelist.get(i) );
 		}
-		for(int i=0;i<filelist.size();++i)
+		for(int i=0;i<privatefilelist.size();++i)
 		{
 			Log.printLine("\nRetrieving file #"+(i+1) );
-			ctlnode0.ClientQuery("RETRIEVE",filelist.get(i) );
+			ctlnode0.ClientQuery("RETRIEVE",privatefilelist.get(i) );
 			
 		}
 				
-		for(int i=0;i<filelist.size();i=i+3)
+		for(int i=0;i<privatefilelist.size();i=i+3)
 		{
 			Log.printLine("\nDeleting file #"+(i+1) );
-			ctlnode0.ClientQuery("DELETE",filelist.get(i) );
+			ctlnode0.ClientQuery("DELETE",privatefilelist.get(i) );
 			
 		}
-		Log.printLine("size "+filelist.size());
+		Log.printLine("size "+privatefilelist.size());
 		
 	}
 	
