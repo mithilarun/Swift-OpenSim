@@ -1,4 +1,4 @@
-package org.opensim.storage;
+package org.opensim.swift;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -125,8 +125,7 @@ public class OpensimStorageServer implements Storage{
 		maxTransferRate = 133; // in MB/sec
 /**		containerAccessTime=
  *		containerCreationTime= 
- *		objectAccessTime=
- *		objectUploadTime
+ *		
  
  */
 	}
@@ -758,13 +757,13 @@ public class OpensimStorageServer implements Storage{
 		}
 		double seekTime = getSeekTime(file.getSize());
 		double transferTime = getTransferTime(file.getSize());
-
+		double containerTime=getContainerCreationTime();
 		// check if the file is in the storage
 		if (contains(file)) {
 			fileList.remove(file);            // remove the file HD
 			nameList.remove(file.getName());  // remove the name from name list
 			currentSize -= file.getSize();    // decrement the current HD space
-			result = seekTime + transferTime;  // total time
+			result = seekTime + transferTime + containerTime;  // total time
 			file.setTransactionTime(result);
 		}
 		return result;
