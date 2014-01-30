@@ -649,7 +649,8 @@ public class OpensimStorageServer implements Storage{
 		}
 		
 		if(file.getSize()>5120){
-			Log.printLine(name+".addFile():Warning-single upload size exceeded to store" +file.getName());
+			Log.printLine(name+".addFile():Warning-single upload size exceeded" +file.getName());
+			return result;
 		}
 		// check the capacity
 		if (file.getSize() + currentSize > capacity) {
